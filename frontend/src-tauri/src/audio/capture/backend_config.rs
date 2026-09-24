@@ -51,12 +51,12 @@ impl AudioCaptureBackend {
         }
     }
 
-    /// Convert to string (lowercase)
-    pub fn to_string(&self) -> String {
+    /// Convert to string identifier (lowercase)
+    pub fn as_str(&self) -> &'static str {
         match self {
-            AudioCaptureBackend::ScreenCaptureKit => "screencapturekit".to_string(),
+            AudioCaptureBackend::ScreenCaptureKit => "screencapturekit",
             #[cfg(target_os = "macos")]
-            AudioCaptureBackend::CoreAudio => "coreaudio".to_string(),
+            AudioCaptureBackend::CoreAudio => "coreaudio",
         }
     }
 
@@ -91,7 +91,7 @@ impl Default for AudioCaptureBackend {
 
 impl std::fmt::Display for AudioCaptureBackend {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.name())
+        write!(f, "{}", self.as_str())
     }
 }
 
